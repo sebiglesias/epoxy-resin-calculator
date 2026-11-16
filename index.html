@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epoxy Resin Calculator — Deep Pour & River Table Mix Ratio (oz, gal, grams)</title>
+  <meta name="description" content="Calculate exact epoxy resin and hardener volume for river tables, deep pour castings, and coatings. Supports 1:1 and 2:1 ratios in fluid oz, gallons, and grams.">
+  <link rel="canonical" href="https://sebiglesias.com.ar/epoxy-resin-calculator/">
+  <meta name="theme-color" content="#3b82f6">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Epoxy Resin Calculator — Deep Pour & River Table Volume">
+  <meta property="og:description" content="Calculate exact Part A resin and Part B hardener volume for river tables, woodworking molds, and deep pours.">
+  <meta property="og:url" content="https://sebiglesias.com.ar/epoxy-resin-calculator/">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BNDBQP0W7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2BNDBQP0W7');
+  </script>
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-3381238987477190">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3381238987477190" crossorigin="anonymous"></script>
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Epoxy Resin & River Table Calculator",
+      "url": "https://sebiglesias.com.ar/epoxy-resin-calculator/",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "description": "Interactive calculator for woodworking epoxy pours, river tables, and casting molds with 1:1 and 2:1 resin/hardener ratio breakdowns.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do you calculate how much epoxy resin you need for a river table?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply the length of the river gap by the average width and the desired pour depth (all in inches) to find total cubic inches. Divide cubic inches by 1.805 to convert directly to fluid ounces, or divide by 231 to convert to US gallons. Always add a 10% safety buffer for container cling and mold sealing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between 1:1 and 2:1 epoxy resin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1:1 ratio epoxy is typically formulated for surface coatings, countertops, and thin casting layers up to 1/4 inch deep with fast 12-24 hour cure times. 2:1 ratio epoxy is engineered for deep pour casting (river tables) up to 2 to 4 inches in a single pour with a slow, controlled exothermic reaction over 48 to 72 hours to prevent thermal cracking and boiling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is it better to measure epoxy by weight (grams) instead of volume?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Measuring by weight on a digital gram scale eliminates meniscus reading errors on plastic cups and account for liquid surface tension. However, because Part A resin is denser (~1.12 g/mL) than Part B hardener (~0.98 g/mL), you must use weight-calibrated ratios if measuring by mass rather than simple volume."
+          }
+        }
+      ]
+    }
+  ]
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">🪵 Woodworking & Casting Precision</div>
+      <h1>Epoxy Resin & River Table Calculator</h1>
+      <p class="subtitle">Calculate exact resin and hardener volumes, 1:1 and 2:1 mix ratios, and mass in grams to prevent exothermic cracking or wasted material.</p>
+    </header>
+
+    <!-- AdSense Top Banner -->
+    <div style="text-align:center; margin: 16px 0;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3381238987477190"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <main class="calc-grid">
+      <!-- Inputs Card -->
+      <form class="card" id="calcForm" onsubmit="event.preventDefault();">
+        <h2>📐 Dimensions & Shape</h2>
+
+        <div class="form-group">
+          <label>Project Mold Shape</label>
+          <div class="shape-toggle" role="radiogroup" aria-label="Project Shape">
+            <label class="shape-btn active" id="shapeRectLabel">
+              <input type="radio" name="shape" value="rectangle" checked style="display:none;">
+              <span>Rectangle / Slab</span>
+            </label>
+            <label class="shape-btn" id="shapeRiverLabel">
+              <input type="radio" name="shape" value="river" style="display:none;">
+              <span>River Table Gap</span>
+            </label>
+            <label class="shape-btn" id="shapeRoundLabel">
+              <input type="radio" name="shape" value="round" style="display:none;">
+              <span>Round / Circle</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="groupLength">
+          <label for="inputLength">
+            Length
+            <span class="hint">Total length of pour</span>
+          </label>
+          <div class="input-wrap">
+            <input type="number" id="inputLength" step="0.25" min="0.5" value="48" required>
+            <span class="input-suffix">inches</span>
+          </div>
+        </div>
+
+        <div class="form-group" id="groupWidth">
+          <label for="inputWidth">
+            <span id="labelWidthText">Average Width</span>
+            <span class="hint" id="hintWidthText">Average width across the gap</span>
+          </label>
+          <div class="input-wrap">
+            <input type="number" id="inputWidth" step="0.25" min="0.25" value="8" required>
+            <span class="input-suffix">inches</span>
+          </div>
+        </div>
+
+        <div class="form-group" id="groupDiameter" style="display:none;">
+          <label for="inputDiameter">
+            Circle Diameter
+            <span class="hint">Across the mold</span>
+          </label>
+          <div class="input-wrap">
+            <input type="number" id="inputDiameter" step="0.25" min="0.5" value="24">
+            <span class="input-suffix">inches</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputDepth">
+            Pour Depth / Thickness
+            <span class="hint">Finished resin depth</span>
+          </label>
+          <div class="input-wrap">
+            <input type="number" id="inputDepth" step="0.125" min="0.05" value="1.5" required>
+            <span class="input-suffix">inches</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Resin Formulation Ratio (Part A : Part B)</label>
+          <div class="ratio-toggle" role="radiogroup" aria-label="Mix Ratio">
+            <label class="ratio-btn active" id="ratio21Label">
+              <input type="radio" name="mixRatio" value="2:1" checked style="display:none;">
+              <span>2:1 Deep Pour (Casting)</span>
+            </label>
+            <label class="ratio-btn" id="ratio11Label">
+              <input type="radio" name="mixRatio" value="1:1" style="display:none;">
+              <span>1:1 Table Top (Coating)</span>
+            </label>
+          </div>
+          <span class="hint" id="ratioTip" style="margin-top:6px; display:block;">Recommended for pours > 0.5" thick (slower cure, zero overheating).</span>
+        </div>
+
+        <div class="form-group">
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+            <input type="checkbox" id="wasteBuffer" checked style="accent-color:#3b82f6; width:18px; height:18px;">
+            <span>Add 10% Waste Buffer (Mixing cup cling & leveling loss)</span>
+          </label>
+        </div>
+      </form>
+
+      <!-- Results Card -->
+      <div class="card">
+        <h2>🎯 Resin Requirements</h2>
+
+        <div class="result-hero">
+          <div class="result-label">Total Volume Needed</div>
+          <div class="result-number" id="totalFlOz">351</div>
+          <div class="result-label" style="color:#ffffff;">Fluid Ounces (fl oz)</div>
+          <div style="font-size:0.95rem; color:#93c5fd; margin-top:6px;" id="totalGalText">≈ 2.74 Gallons (10.38 Liters)</div>
+        </div>
+
+        <div class="mix-breakdown">
+          <div class="mix-col">
+            <div class="mix-badge a">Part A (Resin)</div>
+            <div class="mix-val" id="partAFlOz">234.0 fl oz</div>
+            <div class="mix-sub" id="partAMass">≈ 7,720 grams</div>
+          </div>
+          <div class="mix-col">
+            <div class="mix-badge b">Part B (Hardener)</div>
+            <div class="mix-val" id="partBFlOz">117.0 fl oz</div>
+            <div class="mix-sub" id="partBMass">≈ 3,380 grams</div>
+          </div>
+        </div>
+
+        <div class="specs-grid">
+          <div class="spec-item">
+            <div class="spec-desc">Cubic Volume</div>
+            <div class="spec-val" id="specCuIn">576 cu in</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-desc">Exotherm Risk</div>
+            <div class="spec-val" id="specExo" style="color:#4ade80;">Safe / Low Heat</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-desc">Demold Time</div>
+            <div class="spec-val" id="specCure">48–72 Hours</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-desc">Ideal Room Temp</div>
+            <div class="spec-val" style="color:#38bdf8;">70°F–75°F (21°C–24°C)</div>
+          </div>
+        </div>
+
+        <div id="exothermAlert" style="display:none; background:#451a03; border:1px solid #b45309; border-radius:8px; padding:12px; margin-top:16px; font-size:0.82rem; color:#fef3c7;">
+          ⚠️ <strong>Thermal Warning:</strong> Pours over 0.5" with 1:1 epoxy can cause rapid exothermic runaway, smoking, and deep cracks. Switch to a 2:1 Deep Pour epoxy or pour in multiple thin passes!
+        </div>
+      </div>
+    </main>
+
+    <!-- Amazon Tools & Resin Kits -->
+    <section class="supplies-card">
+      <h3>🛠️ Recommended Deep Pour Resins, Pigments & Woodworking Tools</h3>
+      <div class="supplies-grid">
+        <div class="supply-item">
+          <div>
+            <div class="supply-title">2:1 Deep Pour Epoxy Resin (3 Gallon Kit)</div>
+            <div class="supply-desc">Slow-cure crystal-clear epoxy for river tables, live edge slabs, and castings up to 2"-4" deep.</div>
+          </div>
+          <a href="https://www.amazon.com/s?k=deep+pour+epoxy+resin+kit+3+gallon&tag=sebiglesias-20" target="_blank" rel="nofollow noopener" class="btn-amazon">Check on Amazon →</a>
+        </div>
+        <div class="supply-item">
+          <div>
+            <div class="supply-title">Digital Gram Scale (0.1g Precision 5kg)</div>
+            <div class="supply-desc">Heavy-duty digital lab scale for accurate mass-ratio mixing without measuring cup errors.</div>
+          </div>
+          <a href="https://www.amazon.com/s?k=digital+kitchen+gram+scale+precision+5kg&tag=sebiglesias-20" target="_blank" rel="nofollow noopener" class="btn-amazon">Check on Amazon →</a>
+        </div>
+        <div class="supply-item">
+          <div>
+            <div class="supply-title">Silicone Reusable River Table Molds & Form Tape</div>
+            <div class="supply-desc">Tuck tape and non-stick silicone forms to prevent messy mold leaks and wood adhesion.</div>
+          </div>
+          <a href="https://www.amazon.com/s?k=silicone+epoxy+mold+river+table+form&tag=sebiglesias-20" target="_blank" rel="nofollow noopener" class="btn-amazon">Check on Amazon →</a>
+        </div>
+        <div class="supply-item">
+          <div>
+            <div class="supply-title">Dual Temperature Heat Gun / Micro Torch</div>
+            <div class="supply-desc">Instantly pops surface micro-bubbles and air entrapment within the first 45 minutes of pouring.</div>
+          </div>
+          <a href="https://www.amazon.com/s?k=heat+gun+for+epoxy+resin+bubbles&tag=sebiglesias-20" target="_blank" rel="nofollow noopener" class="btn-amazon">Check on Amazon →</a>
+        </div>
+      </div>
+      <p style="font-size:0.75rem; color:#94a3b8; margin-top:14px; margin-bottom:0; text-align:center;">
+        ⚖️ <em>Affiliate Notice: As an Amazon Associate, this site earns from qualifying purchases at no additional cost to you. We strictly link to quality workshop supplies, silicone molds, and casting resins.</em>
+      </p>
+    </section>
+
+    <!-- FAQ Section for SEO -->
+    <section class="faq-section">
+      <h2 style="font-size:1.35rem; color:#ffffff; margin-bottom:16px;">Woodworker's Epoxy Resin FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">How do you seal live edge wood before an epoxy river pour?</div>
+        <div class="faq-a">Always apply a thin seal coat of 1:1 tabletop epoxy onto the raw live edges with a foam brush 4 to 6 hours before your main pour. Wood pores contain trapped air; without a seal coat, the warm curing epoxy pulls air out of the timber, creating persistent bubbles along the wood-epoxy boundary line.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What causes epoxy resin to flash cure or overheat?</div>
+        <div class="faq-a">Epoxy cures through an exothermic (heat-generating) chemical reaction. If a fast-curing 1:1 resin is poured deeper than its recommended limit (usually 1/4" to 1/2"), the heat cannot dissipate, causing the core temperature to spike above 200°F (93°C). This results in yellowing, thermal stress fractures, and smoke. For depths over 1/2", always use a slow-curing 2:1 deep pour casting resin.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How much pigment or mica powder should I add to epoxy?</div>
+        <div class="faq-a">A general rule of thumb is 1 to 2 grams of mica powder per 16 fluid ounces of mixed epoxy for a vibrant metallic shimmer. For liquid alcohol inks or translucent dye tints, add 2 to 5 drops at a time until reaching desired opacity. Never exceed 5% total additive by volume, or the curing strength will be compromised.</div>
+      </div>
+    </section>
+
+    <!-- Bottom AdSense Banner -->
+    <div style="text-align:center; margin: 32px 0;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-3381238987477190"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <footer>
+      <p>© 2026 <a href="https://sebiglesias.com.ar/">sebiglesias.com.ar</a> · Precision Woodworking & Deep Pour Resin Calculator. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
